@@ -52,4 +52,24 @@ public class ReactToMessageUtil {
             Toast.makeText(context, "Message from Arduino", Toast.LENGTH_SHORT).show();
         }
     };
+
+    /**
+     * 2�o�C�g����int���쐬
+     *
+     * @param hi ��ʃo�C�g
+     * @param lo ���ʃo�C�g
+     * @return
+     */
+    public static int composeInt(byte hi, byte lo) {
+        return ((hi & 0xff) << 8) + (lo & 0xff);
+    }
+
+    public static OnReactToMessageListener creareReactToMessageListener(final Runnable runnable) {
+        return new OnReactToMessageListener() {
+            @Override
+            public void updateUi(Context context) {
+                runnable.run();
+            }
+        };
+    }
 }

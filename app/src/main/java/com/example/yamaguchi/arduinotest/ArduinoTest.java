@@ -1,7 +1,6 @@
 
 package com.example.yamaguchi.arduinotest;
 
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -137,7 +136,7 @@ public class ArduinoTest extends UsbConnectionActivity implements ISubmitMessage
 
     @Override
     public void reactToMessage(byte[] message) {
-        mValue = composeInt(message[0], message[1]);
+        mValue = ReactToMessageUtil.composeInt(message[0], message[1]);
 
         mReactUtil.listener = react1Listener;
 
@@ -182,24 +181,12 @@ public class ArduinoTest extends UsbConnectionActivity implements ISubmitMessage
         }
     }
 
-    private final OnReactToMessageListener react1Listener = new OnReactToMessageListener() {
-
+    private final OnReactToMessageListener react1Listener = ReactToMessageUtil.creareReactToMessageListener(new Runnable() {
         @Override
-        public void updateUi(Context context) {
+        public void run() {
             mStatusText.setText(String.valueOf(mValue));
             float volume = (float) mValue / 1023;
             mMediaPlayer.setVolume(volume, volume);
         }
-    };
-
-    /**
-     * 2�o�C�g����int���쐬
-     * 
-     * @param hi ��ʃo�C�g
-     * @param lo ���ʃo�C�g
-     * @return
-     */
-    private static int composeInt(byte hi, byte lo) {
-        return ((hi & 0xff) << 8) + (lo & 0xff);
-    }
+    });
 }
