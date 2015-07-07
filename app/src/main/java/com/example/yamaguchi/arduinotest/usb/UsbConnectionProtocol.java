@@ -1,5 +1,5 @@
 
-package com.example.yamaguchi.arduinotest;
+package com.example.yamaguchi.arduinotest.usb;
 
 /**
  * Arduino�s�̒ʐM�v���g�R�����߂�N���X

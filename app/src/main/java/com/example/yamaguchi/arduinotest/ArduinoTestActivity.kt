@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import com.example.yamaguchi.arduinotest.usb.ReactToMessageUtil
 
-import com.example.yamaguchi.arduinotest.UsbConnection.OnClosedAccesoryListerner
-import com.example.yamaguchi.arduinotest.UsbConnection.OnOpenAccesoryListener
-import com.example.yamaguchi.arduinotest.UsbConnection.OnWillCloseAccesoryListerner
-import com.example.yamaguchi.arduinotest.UsbConnectionActivity.IReceiveMessage
-import com.example.yamaguchi.arduinotest.UsbConnectionActivity.ISubmitMessage
+import com.example.yamaguchi.arduinotest.usb.UsbConnection.OnClosedAccesoryListerner
+import com.example.yamaguchi.arduinotest.usb.UsbConnection.OnOpenAccesoryListener
+import com.example.yamaguchi.arduinotest.usb.UsbConnection.OnWillCloseAccesoryListerner
+import com.example.yamaguchi.arduinotest.usb.UsbConnectionActivity
+import com.example.yamaguchi.arduinotest.usb.UsbConnectionActivity.IReceiveMessage
+import com.example.yamaguchi.arduinotest.usb.UsbConnectionActivity.ISubmitMessage
 
 import java.io.IOException
 import java.io.InputStream
 
-public class ArduinoTest : UsbConnectionActivity(), ISubmitMessage, IReceiveMessage {
+public class ArduinoTestActivity : UsbConnectionActivity(), ISubmitMessage, IReceiveMessage {
 
     private var mStatusText: TextView? = null
     private val mButton: Button? = null
@@ -150,7 +152,7 @@ public class ArduinoTest : UsbConnectionActivity(), ISubmitMessage, IReceiveMess
             }
 
             // ���y�Đ�
-            mMediaPlayer = MediaPlayer.create(this@ArduinoTest, R.raw.girl_of_white_tiger_field)
+            mMediaPlayer = MediaPlayer.create(this@ArduinoTestActivity, R.raw.girl_of_white_tiger_field)
             mMediaPlayer!!.start()
 
             while (mThreadRunning) {

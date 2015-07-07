@@ -1,5 +1,5 @@
 
-package com.example.yamaguchi.arduinotest;
+package com.example.yamaguchi.arduinotest.usb;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;

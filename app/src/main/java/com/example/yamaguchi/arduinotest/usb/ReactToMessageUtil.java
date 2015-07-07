@@ -1,5 +1,5 @@
 
-package com.example.yamaguchi.arduinotest;
+package com.example.yamaguchi.arduinotest.usb;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,11 +10,8 @@ import android.widget.Toast;
  * 
  * @author tomotaka
  */
-interface OnReactToMessageListener {
-    public void updateUi(Context context);
-}
-
 interface OnShortToastMessageListener extends OnReactToMessageListener {
+
 }
 
 /**

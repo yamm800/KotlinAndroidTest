@@ -1,5 +1,5 @@
 
-package com.example.yamaguchi.arduinotest;
+package com.example.yamaguchi.arduinotest.usb;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class UsbConnectionActivity extends Activity {
     }
 
     protected UsbConnection mUsbConnection;
-    ReactToMessageUtil mReactUtil;
+    public ReactToMessageUtil mReactUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
