@@ -1,14 +1,11 @@
 package com.example.yamaguchi.arduinotest.common;
 
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.example.yamaguchi.arduinotest.R;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -44,7 +41,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Getter
     protected LinearLayout baseContentLl;
 
-    private DrawerLayout mBaseView;
+//    private DrawerLayout mBaseView;
 
     private boolean mIsHomeAsUpEnabled = false;
 
@@ -77,11 +74,11 @@ public abstract class BaseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         lifecycleSubject.onNext(LifecycleEvent.CREATE);
 
-        mBaseView = (DrawerLayout) getLayoutInflater().inflate(R.layout.base_activity, null);
-        setContentView(mBaseView);
+//        mBaseView = (DrawerLayout) getLayoutInflater().inflate(R.layout.base_activity, null);
+//        setContentView(mBaseView);
 
-        setSupportActionBar(toolBar);
-        setActionBar();
+//        setSupportActionBar(toolBar);
+//        setActionBar();
     }
 
     @Override
