@@ -82,7 +82,6 @@ public class ArduinoTestActivity : UsbConnectionActivity(), ISubmitMessage, IRec
         mUsbConnection.setOnOpenAccessoryListener(object : OnOpenAccesoryListener {
 
             override fun onOpenAccessory() {
-                // USB�ڑ�����ɌĂ΂��B���ł�while���[�v���񂵂Ă���
                 Thread(MyRunnable()).start()
             }
         })
@@ -122,7 +121,6 @@ public class ArduinoTestActivity : UsbConnectionActivity(), ISubmitMessage, IRec
 
         mReactUtil.listener = react1Listener
 
-        // UI�X���b�h�Ŏ��s
         if (mReactUtil.listener != null) {
             mReactUtil.runOnUiThread()
         }
@@ -131,9 +129,7 @@ public class ArduinoTestActivity : UsbConnectionActivity(), ISubmitMessage, IRec
     private fun readByte(input: InputStream) {
         val buffer = ByteArray(2)
         try {
-            // ��̓X�g���[���̓ǂݍ���
             input.read(buffer)
-            // UI�����̓��C���X���b�h�ōs��
             reactToMessage(buffer)
         } catch (e: IOException) {
             e.printStackTrace()
@@ -151,12 +147,10 @@ public class ArduinoTestActivity : UsbConnectionActivity(), ISubmitMessage, IRec
                 return
             }
 
-            // ���y�Đ�
             mMediaPlayer = MediaPlayer.create(this@ArduinoTestActivity, R.raw.girl_of_white_tiger_field)
             mMediaPlayer!!.start()
 
             while (mThreadRunning) {
-                // ���̒���arduino����̐M���̓ǂݍ��݁AUI�Ȃǂ̍X�V�����Ă���
                 readByte(inputStream)
             }
         }

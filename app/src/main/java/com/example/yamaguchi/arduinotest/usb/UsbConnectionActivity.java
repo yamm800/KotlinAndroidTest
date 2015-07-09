@@ -1,15 +1,14 @@
 
 package com.example.yamaguchi.arduinotest.usb;
 
-import android.app.Activity;
 import android.os.Bundle;
 
+import com.example.yamaguchi.arduinotest.common.BaseActivity;
+
 /**
- * Arduino�Ƃ̐ڑ����s��Activity�̊��N���X IUsbConnection���������ׂ�
- * 
- * @author tomotaka
+ *
  */
-public class UsbConnectionActivity extends Activity {
+public class UsbConnectionActivity extends BaseActivity {
     public interface ISubmitMessage {
         public void submitMessage();
 
@@ -34,24 +33,15 @@ public class UsbConnectionActivity extends Activity {
         initConnection();
     }
 
-    /**
-     * View��id�Ŏ擾�����菉����s���A���X�i�[�⑮����ݒ肷��
-     */
     protected void setView() {
 
     }
 
-    /**
-     * UsbConnection���쐬���A���W�X�^�[��o�^
-     */
     private void initConnection() {
         mUsbConnection = new UsbConnection(this);
         mUsbConnection.registerReceiver(this);
     }
 
-    /**
-     * �R�l�N�V�����̃��X�i�[���܂Ƃ߂Đݒ肷��
-     */
     protected void setConnectionListener() {
 
     }
@@ -74,21 +64,10 @@ public class UsbConnectionActivity extends Activity {
         super.onDestroy();
     }
 
-    /**
-     * arduino�ɑ��M���郁�b�Z�[�W�̍쐬
-     * 
-     * @param msg
-     * @return
-     */
     protected byte[] createMessage(int msg) {
         return null;
     }
 
-    /**
-     * �ǂݍ��񂾃��b�Z�[�W�ɍ��킹��util�̃��X�i�[��I��
-     * 
-     * @param message
-     */
     public void reactToMessage(byte[] message) {
 
     }

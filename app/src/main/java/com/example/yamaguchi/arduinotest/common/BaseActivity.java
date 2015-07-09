@@ -19,7 +19,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.subjects.BehaviorSubject;
 
 /**
- * Created by yamaguchi on 15/07/09.
+ *
  */
 public abstract class BaseActivity extends ActionBarActivity {
 
@@ -49,13 +49,13 @@ public abstract class BaseActivity extends ActionBarActivity {
     private boolean mIsHomeAsUpEnabled = false;
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         lifecycleSubject.onNext(LifecycleEvent.RESUME);
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
         lifecycleSubject.onNext(LifecycleEvent.PAUSE);
     }
@@ -67,13 +67,13 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
         lifecycleSubject.onNext(LifecycleEvent.STOP);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lifecycleSubject.onNext(LifecycleEvent.CREATE);
 

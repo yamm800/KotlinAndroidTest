@@ -21,6 +21,10 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    // gradle バグ対策. これがないと、同じライブラリが２つあると怒られる事がある
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {

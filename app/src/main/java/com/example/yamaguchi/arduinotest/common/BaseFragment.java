@@ -11,7 +11,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.subjects.BehaviorSubject;
 
 /**
- * Created by yamaguchi on 15/07/09.
+ *
  */
 public class BaseFragment extends Fragment {
 

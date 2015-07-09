@@ -19,16 +19,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * USB�A�N�Z�T�����g�p���邽�߂̃��b�p�N���X
- * 
- * @author tomotaka
+ *
  */
 public class UsbConnection {
-    // USB�ڑ��֌W
-    /**
-     * USB�A�N�Z�T�����Ȃ������ɌĂ΂�� {@link UsbConnection}
-     * openStreamAccessory(UsbAccessory accessory)���ŌĂ΂�Ă���
-     */
+
     private OnOpenAccesoryListener mOnOpenAccessoryListener;
 
     public interface OnOpenAccesoryListener {
@@ -39,12 +33,10 @@ public class UsbConnection {
         mOnOpenAccessoryListener = listener;
     }
 
-    /**
-     * USB�A�N�Z�T�������O���O�ɌĂ΂�� {@link UsbConnection} closeAccessory()���ŌĂяo�����
-     */
+
     private OnWillCloseAccesoryListerner mOnWillCloseAccessoryListener;
 
-    public static interface OnWillCloseAccesoryListerner {
+    public interface OnWillCloseAccesoryListerner {
         public void onWillCloseAccessory();
     }
 
@@ -52,12 +44,10 @@ public class UsbConnection {
         mOnWillCloseAccessoryListener = listener;
     }
 
-    /**
-     * USB�A�N�Z�T�������O�������ɌĂ΂�� {@link UsbConnection} closeAccessory()���ŌĂяo�����
-     */
+
     private OnClosedAccesoryListerner mOnClosedAccessoryListener;
 
-    public static interface OnClosedAccesoryListerner {
+    public interface OnClosedAccesoryListerner {
         public void onClosedAccessory();
     }
 
@@ -78,7 +68,6 @@ public class UsbConnection {
     private OutputStream mOutputStream;
     private FileInputStream mInputStream;
 
-    // �R���X�g���N�^
     public UsbConnection(Context context) {
         mActionUsbPermissionString = "aoabook.sample.accessory.action.USB_PERMISSION";
         setUsbReceiver();
@@ -90,12 +79,8 @@ public class UsbConnection {
                 mActionUsbPermissionString), 0);
     }
 
-    // USB�̔����������擾���邽�߂̃u���[�h�L���X�g���V�[�o
     private BroadcastReceiver mUsbReceiver;
 
-    /**
-     * Usb���V�[�o�̐ݒ���s��
-     */
     private void setUsbReceiver() {
         mUsbReceiver = new BroadcastReceiver() {
 
@@ -128,29 +113,16 @@ public class UsbConnection {
         };
     }
 
-    /**
-     * ���V�[�o�[�̓o�^
-     * 
-     * @param context
-     */
     public void registerReceiver(Context context) {
         IntentFilter filter = new IntentFilter(mActionUsbPermissionString);
         filter.addAction(UsbManager.ACTION_USB_ACCESSORY_DETACHED);
         context.registerReceiver(mUsbReceiver, filter);
     }
 
-    /**
-     * ���X�i�[���폜
-     * 
-     * @param context
-     */
     public void unregisterReceiver(Context context) {
         context.unregisterReceiver(mUsbReceiver);
     }
 
-    /**
-     * Usb�A�N�Z�T���[���J��
-     */
     public void openAccessroy() {
         UsbAccessory[] accessories = mUsbManager.getAccessoryList();
         mAccessory = (accessories == null ? null : accessories[0]);
@@ -170,11 +142,6 @@ public class UsbConnection {
         }
     }
 
-    /**
-     * ���ۂ�Usb�Ƃ̃X�g���[�����擾����
-     * 
-     * @param accessory
-     */
     private void openStreamAccessory(UsbAccessory accessory) {
         mFileDescriptor = mUsbManager.openAccessory(accessory);
         if (mFileDescriptor != null) {
@@ -191,9 +158,6 @@ public class UsbConnection {
         }
     }
 
-    /**
-     * Usb�����
-     */
     public void closeAccessory() {
 
         try {
@@ -218,7 +182,6 @@ public class UsbConnection {
         }
     }
 
-    // �A�N�Z�b�T
     public OutputStream getOutputStream() {
         return mOutputStream;
     }

@@ -6,19 +6,14 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * Arduino���炫�����b�Z�[�W���������郊�X�i�[ UI�̍X�V���������̒��ɓ��ReactToMessageUtil��runOnUiThread()���Ă�
- * 
- * @author tomotaka
+ *
  */
 interface OnShortToastMessageListener extends OnReactToMessageListener {
 
 }
 
 /**
- * UsbConnectionProtocol�ɏ]��, Arduino���炫�����b�Z�[�W����������N���X
- * 
- * @see UsbConnectionProtocol
- * @author tomotaka
+ *
  */
 public class ReactToMessageUtil {
     public OnReactToMessageListener listener;
@@ -28,7 +23,6 @@ public class ReactToMessageUtil {
         mActivity = activity;
     }
 
-    // UI�X���b�h�Ŏ��s
     public void runOnUiThread() {
         mActivity.runOnUiThread(new Runnable() {
             @Override
@@ -51,11 +45,7 @@ public class ReactToMessageUtil {
     };
 
     /**
-     * 2�o�C�g����int���쐬
      *
-     * @param hi ��ʃo�C�g
-     * @param lo ���ʃo�C�g
-     * @return
      */
     public static int composeInt(byte hi, byte lo) {
         return ((hi & 0xff) << 8) + (lo & 0xff);
