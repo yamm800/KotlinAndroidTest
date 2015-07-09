@@ -41,6 +41,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.25.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.code.gson:gson:2.3'
+    compile 'org.projectlombok:lombok:1.14.8'
 }
 buildscript {
     ext.kotlin_version = '0.12.613'

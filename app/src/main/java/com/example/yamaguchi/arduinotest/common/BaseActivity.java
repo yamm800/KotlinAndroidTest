@@ -1,0 +1,110 @@
+package com.example.yamaguchi.arduinotest.common;
+
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.LinearLayout;
+
+import com.example.yamaguchi.arduinotest.R;
+
+import lombok.Getter;
+import lombok.Setter;
+import rx.Observable;
+import rx.android.lifecycle.LifecycleEvent;
+import rx.android.lifecycle.LifecycleObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.subjects.BehaviorSubject;
+
+/**
+ * Created by yamaguchi on 15/07/09.
+ */
+public abstract class BaseActivity extends ActionBarActivity {
+
+    private final BehaviorSubject<LifecycleEvent> lifecycleSubject = BehaviorSubject.create();
+
+    public Observable<LifecycleEvent> lifecycle() {
+        return lifecycleSubject.asObservable();
+    }
+
+    public <T> Observable<T> bind(Observable<T> observable) {
+        return LifecycleObservable.bindActivityLifecycle(
+                lifecycle(),
+                observable.observeOn(AndroidSchedulers.mainThread()));
+    }
+
+    @Getter
+    protected Toolbar toolBar;
+
+    @Setter @Getter
+    protected View toolBarView;
+
+    @Getter
+    protected LinearLayout baseContentLl;
+
+    private DrawerLayout mBaseView;
+
+    private boolean mIsHomeAsUpEnabled = false;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        lifecycleSubject.onNext(LifecycleEvent.RESUME);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        lifecycleSubject.onNext(LifecycleEvent.PAUSE);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        lifecycleSubject.onNext(LifecycleEvent.START);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        lifecycleSubject.onNext(LifecycleEvent.STOP);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        lifecycleSubject.onNext(LifecycleEvent.CREATE);
+
+        mBaseView = (DrawerLayout) getLayoutInflater().inflate(R.layout.base_activity, null);
+        setContentView(mBaseView);
+
+        setSupportActionBar(toolBar);
+        setActionBar();
+    }
+
+    @Override
+    protected void onDestroy() {
+        lifecycleSubject.onNext(LifecycleEvent.DESTROY);
+        super.onDestroy();
+    }
+
+    private void setActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        // CutomViewを表示するか
+        actionBar.setDisplayShowCustomEnabled(false);
+
+        // iconを表示するか
+        actionBar.setDisplayShowHomeEnabled(true);
+
+        actionBar.setHomeButtonEnabled(true);
+
+        // 戻るボタンを表示するかどうか
+        actionBar.setDisplayHomeAsUpEnabled(mIsHomeAsUpEnabled);
+
+        // タイトルを表示するか
+        actionBar.setDisplayShowTitleEnabled(false);
+    }
+}
+
